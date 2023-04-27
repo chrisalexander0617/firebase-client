@@ -5,6 +5,7 @@ import { auth } from "./config/firebase";
 import routes from "./config/routes";
 import Center from "./components/utils/Center";
 import AuthChecker from "./components/auth/AuthChecker";
+import { getUserByGoogleUID } from './api/UserAccountService'
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -13,6 +14,11 @@ function App() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.info("User detected.");
+        console.log('Current user ID', user.uid) // store this in the database
+
+        const result = getUserByGoogleUID(user.uid)
+        console.log('Result', result)
+
       } else {
         console.info("No user detected");
       }

@@ -6,7 +6,7 @@ import { Button, Typography } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import Center from "../utils/Center";
 
-interface Props {}
+interface Props { }
 
 const AuthContainer = (props: Props) => {
   const navigate = useNavigate();
@@ -18,6 +18,8 @@ const AuthContainer = (props: Props) => {
     signInWithPopup(auth, Providers.google)
       .then(() => {
         setDisabled(false);
+
+        if (auth.currentUser) console.log('Current user ID', auth.currentUser.uid)
         console.info("TODO: navigate to authenticated screen");
         navigate("/");
       })
